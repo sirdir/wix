@@ -29,36 +29,50 @@ public class WixTest {
         driver.get(BASE_URL);
         StartPage startPage = PageFactory.initElements(driver, StartPage.class);
         //1. Go to the Shop
-        startPage.openShop();
-        //assert
+        ShopPage shopPage = startPage.openShop();
+        //assert todo
 
         //2. Select product GLASSES from gallery shown
-        //assert
+        ItemPage itemPage = shopPage.openItem();
+        //assert todo
         //3. Add item to Cart
-        //assert
+        itemPage.addToCart();
+        //assert todo
         //4. Remove item from Cart
-        //assert
+        itemPage.sideCart.removeItem();
+        //assert todo
         //5. Minimize the Cart
-        //assert
+        itemPage = itemPage.sideCart.minimizeCart(ItemPage.class); //todo rethink generic
+        //assert todo
         //6. Add product to Cart again
-        //assert
+        itemPage.addToCart();
+        //assert todo
         //7. Minimize the Cart
-        //assert
+        itemPage = itemPage.sideCart.minimizeCart(ItemPage.class); //todo rethink generic
+        //assert todo
         //8. Go back to main STORES gallery
-        //assert
+        shopPage = itemPage.header.openStores();
+        //assert todo
         //9. Go to Bag of Items and expect glasses items
-        //assert
+        shopPage.header.openCart();
+        //assert todo
         //10. Minimize the Cart
-        //assert
+        shopPage = shopPage.sideCart.minimizeCart(ShopPage.class);
+        //assert todo
         //11. Select product SCARF from the gallery shown
-        //assert
+        itemPage = shopPage.openScarfItem();
+        //assert todo
         //12. Add item to Cart
-        //assert
+        itemPage.addToCart();
+        //assert todo
         //13. Go to Cart View
-        //assert
+        CartPage cartPage = itemPage.sideCart.goToCart();
+        //assert todo
         //14. Change the quantity of glasses to 3
-        //assert
+        cartPage.changeItemQuantity(3);
+        //assert todo
         //15. Remove Scarf from the Cart View
-
+        cartPage.removeScarfItem();
+        //assert todo
     }
 }
