@@ -27,7 +27,7 @@ public class ShopPage extends BasePage {
 
     public ItemPage openItem() {
         driver.switchTo().defaultContent();
-        driver.switchTo().frame("TPASection_jh9acbfxiframe");
+        wait.until(frameToBeAvailableAndSwitchToIt("TPASection_jh9acbfxiframe"));
         wait.until(visibilityOf(glasses)).click();//todo dynamically select item or smth else
 
         return PageFactory.initElements(driver, ItemPage.class);

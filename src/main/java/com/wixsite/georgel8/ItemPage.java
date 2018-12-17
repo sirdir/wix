@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
 public class ItemPage extends BasePage {
 
     public SideCartComponent sideCart;
@@ -23,8 +25,8 @@ public class ItemPage extends BasePage {
 
     public ItemPage addToCart() {
         driver.switchTo().defaultContent();
-        driver.switchTo().frame("TPAMultiSection_jh9acbtniframe");
-        wait.until(ExpectedConditions.visibilityOf(addToCartBtn)).click();
+        wait.until(frameToBeAvailableAndSwitchToIt("TPAMultiSection_jh9acbtniframe"));
+        wait.until(visibilityOf(addToCartBtn)).click();
 
         return this;
     }

@@ -11,7 +11,7 @@ public class StartPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(id = "comp-jhalo8eilabel")
+    @FindBy(id = "comp-jhalo8eilink")
     private WebElement shopBtn;
 
     public ShopPage openShop() {
