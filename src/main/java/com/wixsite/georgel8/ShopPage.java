@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.frameToBeAvailableAndSwitchToIt;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public class ShopPage extends BasePage {
 
@@ -22,7 +22,7 @@ public class ShopPage extends BasePage {
     @FindBy(xpath = "(.//div/h3[@class='title'])[2]") //todo
     private WebElement glasses;
 
-    @FindBy(xpath = "(.//div/h3[@class='title'])[6]") //todo
+    @FindBy(xpath = "(.//div/h3[@class='title'])[8]") //todo
     private WebElement scarf;
 
     public ItemPage openItem() {

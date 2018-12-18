@@ -4,6 +4,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class CartPage extends BasePage {
 
@@ -17,11 +20,13 @@ public class CartPage extends BasePage {
     @FindBy(css = "button._3FsQD")
     private WebElement removeLink;
 
-    public CartPage changeItemQuantity(int quantity) {
+    public CartPage changeItemQuantity(Integer quantity) {
         driver.switchTo().defaultContent();
-        driver.switchTo().frame("TPAMultiSection_jh9acbtyiframe");
-        quantityInput.clear();
-        quantityInput.sendKeys(String.valueOf(quantity));
+        wait.until(frameToBeAvailableAndSwitchToIt("TPAMultiSection_jh9acbtyiframe"));
+//        driver.switchTo().frame("TPAMultiSection_jh9acbtyiframe");
+        wait.until(visibilityOf(quantityInput));
+        quantityInput.sendKeys(Keys.DELETE);
+        quantityInput.sendKeys(quantity.toString());
         quantityInput.sendKeys(Keys.TAB);
 
         return this;
@@ -29,7 +34,8 @@ public class CartPage extends BasePage {
 
     public CartPage removeScarfItem() {
         driver.switchTo().defaultContent();
-        driver.switchTo().frame("TPAMultiSection_jh9acbtyiframe");
+        wait.until(frameToBeAvailableAndSwitchToIt("TPAMultiSection_jh9acbtyiframe"));
+//        driver.switchTo().frame("TPAMultiSection_jh9acbtyiframe");
         removeLink.click();
 
         return this;

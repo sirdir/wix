@@ -17,6 +17,7 @@ public class WixTest {
     static void setupBrowser() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
     }
 
     @AfterAll

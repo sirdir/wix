@@ -1,5 +1,6 @@
 package com.wixsite.georgel8;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,13 +20,16 @@ public class ItemPage extends BasePage {
         header = PageFactory.initElements(driver, HeaderComponent.class);
     }
 
-    @FindBy(css = "button[data-hook='add-to-sideCart']")
+    @FindBy(css = "button[data-hook='add-to-cart']")
     private WebElement addToCartBtn;
 
 
     public ItemPage addToCart() {
         driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt("TPAMultiSection_jh9acbtniframe"));
+        wait.until(refreshed(presenceOfElementLocated(By.id("TPAMultiSection_jh9acbtniframe"))));
+//        wait.until((By.id("TPAMultiSection_jh9acbtniframe")));
+//        wait.until(refreshed(By.id("TPAMultiSection_jh9acbtniframe")));
+        wait.until(refreshed(frameToBeAvailableAndSwitchToIt("TPAMultiSection_jh9acbtniframe")));
         wait.until(visibilityOf(addToCartBtn)).click();
 
         return this;
