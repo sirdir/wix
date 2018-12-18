@@ -21,10 +21,8 @@ public class CartPage extends BasePage {
     private WebElement removeLink;
 
     public CartPage changeItemQuantity(Integer quantity) {
-        driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt("TPAMultiSection_jh9acbtyiframe"));
-//        driver.switchTo().frame("TPAMultiSection_jh9acbtyiframe");
-        wait.until(visibilityOf(quantityInput));
+        switchToFrame("TPAMultiSection_jh9acbtyiframe");
+        wait.until(visibilityOf(quantityInput)).sendKeys(Keys.DELETE);
         quantityInput.sendKeys(Keys.DELETE);
         quantityInput.sendKeys(quantity.toString());
         quantityInput.sendKeys(Keys.TAB);
@@ -33,9 +31,7 @@ public class CartPage extends BasePage {
     }
 
     public CartPage removeScarfItem() {
-        driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt("TPAMultiSection_jh9acbtyiframe"));
-//        driver.switchTo().frame("TPAMultiSection_jh9acbtyiframe");
+        switchToFrame("TPAMultiSection_jh9acbtyiframe");
         removeLink.click();
 
         return this;

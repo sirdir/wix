@@ -1,12 +1,10 @@
 package com.wixsite.georgel8;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -28,12 +26,18 @@ public class SideCartComponent extends BasePage {
     @FindBy(css = "footer > a[data-hook='widget-view-cart-button']")
     private WebElement viewCartBtn;
 
+    @FindBy(css = "iframe.s_yOSHETPAPopupSkiniframe")
+    private WebElement iFrame;
+
+    @FindBy(css = "div.minicart")
+    private WebElement miniCart;
+
     public SideCartComponent removeItem() {
-        driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe.s_yOSHETPAPopupSkiniframe")));
-        wait.until(visibilityOf(itemInCart));
+        switchToFrame(iFrame);
+        wait.until(attributeContains(miniCart, "class", "active"));
         new Actions(driver)
                 .moveToElement(itemInCart)
+                .pause(1000)
                 .moveToElement(crossToDel)
                 .click()
                 .perform();
@@ -42,17 +46,17 @@ public class SideCartComponent extends BasePage {
     }
 
     public <T> T minimizeCart(Class<T> page) {
-        driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe.s_yOSHETPAPopupSkiniframe")));
-        wait.until(not(stalenessOf(closeCartBtn)));
-        wait.until(elementToBeClickable(closeCartBtn)).click();
+        switchToFrame(iFrame);
+        wait.until(attributeContains(miniCart, "class", "active"));
+        closeCartBtn.click();
+        wait.until(not(attributeContains(miniCart, "class", "active")));
 
         return PageFactory.initElements(driver, page);
     }
 
     public CartPage goToCart() {
-        driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe.s_yOSHETPAPopupSkiniframe")));
+        switchToFrame(iFrame);
+        wait.until(attributeContains(miniCart, "class", "active"));
         wait.until(elementToBeClickable(viewCartBtn)).click();
 //        viewCartBtn.click();
 

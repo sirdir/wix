@@ -1,12 +1,13 @@
 package com.wixsite.georgel8;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.frameToBeAvailableAndSwitchToIt;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class ShopPage extends BasePage {
 
@@ -17,6 +18,8 @@ public class ShopPage extends BasePage {
         super(driver);
         header = PageFactory.initElements(driver, HeaderComponent.class);
         sideCart = PageFactory.initElements(driver, SideCartComponent.class);
+        switchToFrame("TPASection_jh9acbfxiframe");
+        wait.until(visibilityOfAllElementsLocatedBy(allProducts));
     }
 
     @FindBy(xpath = "(.//div/h3[@class='title'])[2]") //todo
@@ -25,17 +28,21 @@ public class ShopPage extends BasePage {
     @FindBy(xpath = "(.//div/h3[@class='title'])[8]") //todo
     private WebElement scarf;
 
-    public ItemPage openItem() {
-        driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt("TPASection_jh9acbfxiframe"));
+//    @FindBy(tagName = "product-item")
+//    private WebElement allProducts;
+
+//    private By allProducts = By.tagName("product-item");
+    private By allProducts = By.cssSelector("li.gallery-item");
+
+    public ItemPage openGlassItem() {
+        switchToFrame("TPASection_jh9acbfxiframe");
         wait.until(visibilityOf(glasses)).click();//todo dynamically select item or smth else
 
         return PageFactory.initElements(driver, ItemPage.class);
     }
 
     public ItemPage openScarfItem() {
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame("TPASection_jh9acbfxiframe");
+        switchToFrame("TPASection_jh9acbfxiframe");
         wait.until(visibilityOf(scarf)).click();//todo dynamically select item or smth else
 
         return PageFactory.initElements(driver, ItemPage.class);

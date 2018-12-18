@@ -34,7 +34,7 @@ public class WixTest {
         //assert todo
 
         //2. Select product GLASSES from gallery shown
-        ItemPage itemPage = shopPage.openItem();
+        ItemPage itemPage = shopPage.openGlassItem();
         //assert todo
         //3. Add item to Cart
         itemPage.addToCart();

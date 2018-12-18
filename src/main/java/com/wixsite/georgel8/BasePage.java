@@ -2,7 +2,10 @@ package com.wixsite.georgel8;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.frameToBeAvailableAndSwitchToIt;
 
 public abstract class BasePage {
 
@@ -16,12 +19,17 @@ public abstract class BasePage {
 
     void switchToFrame(By locator) {
         driver.switchTo().defaultContent();
-        driver.switchTo().frame(driver.findElement(locator));
+        wait.until(frameToBeAvailableAndSwitchToIt(locator));
+    }
+
+    void switchToFrame(WebElement element) {
+        driver.switchTo().defaultContent();
+        wait.until(frameToBeAvailableAndSwitchToIt(element));
     }
 
     void switchToFrame(String id) {
         driver.switchTo().defaultContent();
-        driver.switchTo().frame(id);
+        wait.until(frameToBeAvailableAndSwitchToIt(id));
     }
 
 }

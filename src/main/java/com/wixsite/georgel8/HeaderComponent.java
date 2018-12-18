@@ -6,8 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class HeaderComponent extends BasePage {
 
@@ -20,12 +19,14 @@ public class HeaderComponent extends BasePage {
 
     @FindBy(css = "._1gJ4T._3tSTQ")
     private WebElement bagIcon;
+//
+//    @FindBy(css = "iframe.s_yOSHETPAPopupSkiniframe")
+//    private WebElement wrapper;
 
     public ShopPage openStores() {
         driver.switchTo().defaultContent();
-        wait.until(invisibilityOfElementLocated(By.cssSelector("iframe.s_yOSHETPAPopupSkiniframe")));
+//        wait.until(invisibilityOf(wrapper));
         wait.until(elementToBeClickable(storesLink)).click();
-//        storesLink.click();
 
         return PageFactory.initElements(driver, ShopPage.class);
     }
@@ -33,12 +34,11 @@ public class HeaderComponent extends BasePage {
     public void openCart() {
         driver.switchTo().defaultContent();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         wait.until(elementToBeClickable(bagIcon)).click();
-//        bagIcon.click();
 
 //        return PageFactory.initElements(driver, SideCartComponent.class);
     }
