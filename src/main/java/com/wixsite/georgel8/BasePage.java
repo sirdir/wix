@@ -1,6 +1,7 @@
 package com.wixsite.georgel8;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,17 +20,23 @@ public abstract class BasePage {
 
     void switchToFrame(By locator) {
         driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt(locator));
+        wait
+                .ignoring(StaleElementReferenceException.class)
+                .until(frameToBeAvailableAndSwitchToIt(locator));
     }
 
     void switchToFrame(WebElement element) {
         driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt(element));
+        wait
+                .ignoring(StaleElementReferenceException.class)
+                .until(frameToBeAvailableAndSwitchToIt(element));
     }
 
     void switchToFrame(String id) {
         driver.switchTo().defaultContent();
-        wait.until(frameToBeAvailableAndSwitchToIt(id));
+        wait
+                .ignoring(StaleElementReferenceException.class)
+                .until(frameToBeAvailableAndSwitchToIt(id));
     }
 
 }
